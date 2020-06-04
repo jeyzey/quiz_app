@@ -2,21 +2,28 @@ import 'package:flutter/material.dart';
 import './question.dart';
 import './answer.dart';
 
+// void main() {
+//   runApp(MyApp());
+// }
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _MyAppState();
+  }
 }
 
 class _MyAppState extends State<MyApp> {
-  var questionIndex = 0;
+  var _questionIndex = 0;
 
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
-      questionIndex = questionIndex + 1;
+      _questionIndex = _questionIndex + 1;
     });
-    print(questionIndex);
+    print(_questionIndex);
   }
 
   @override
@@ -24,18 +31,17 @@ class _MyAppState extends State<MyApp> {
     var questions = [
       {
         'questionText': 'What\'s your favorite color?',
-        'answer': ['Black', 'Red', 'Green', 'White'],
+        'answers': ['Black', 'Red', 'Green', 'White'],
       },
       {
         'questionText': 'What\'s your favorite animal?',
-        'answer': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+        'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
       },
       {
-        'questionText': 'What\'s your favorite instructor?',
-        'answer': ['Aiden', 'Ailey', 'Arnie', 'Kourtney'],
+        'questionText': 'Who\'s your favorite instructor?',
+        'answers': ['Max', 'Max', 'Max', 'Max'],
       },
     ];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -44,10 +50,11 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Question(
-              questions[questionIndex]['questionText'],
+              questions[_questionIndex]['questionText'],
             ),
-            ...(questions[questionIndex]['answers'] as List<String>).map((answer) {
-              return Answer(answerQuestion, answer);
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
             }).toList()
           ],
         ),
